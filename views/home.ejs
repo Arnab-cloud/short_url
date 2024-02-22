@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        a{
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+    <title>Home Page</title>
+</head>
+<body>
+    <a href="http://localhost:8002"><h1>Homepage</h1></a>
+    <form method="post" action="/url">
+        <label>Enter your URL</label>
+        <input type="text" name="url" id="orUrl" placeholder="https://example.com">
+        <button type="submit">Generate</button>
+    </form>
+    <% if (locals.id) { %>
+     <p>URL generated: <a href="<%= id %>" target="_blank"><%= id %></a></p>
+    <% } %>
+    <% if (locals.allUrls) { %>
+        <table>
+            <thead>
+                <th>Sl No.</th>
+                <th>Short Id</th>
+                <th>Redirect Url</th>
+                <th>Number of clicks</th>
+            </thead>
+            <tbody>
+                <% allUrls.forEach((url, index) => { %>
+                 <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= url.shortId %></td>
+                    <td><%= url.redirectUrl %></td>
+                    <td><%= url.numberOfClicks.length %></td>
+                 </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+    
+</body>
+</html>
