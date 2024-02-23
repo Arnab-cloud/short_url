@@ -9,7 +9,7 @@ async function handleUserSignUp(req, res){
         email,
         password,
     });
-    return res.render("home");
+    return res.render("login");
 };
 
 async function handleUserLogin(req, res){

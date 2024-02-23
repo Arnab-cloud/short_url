@@ -1,4 +1,3 @@
-// get shortId to generate shortID
 const shortid = require("shortid");
 const URLS = require("../models/url");
 
@@ -9,12 +8,12 @@ async function handleNewUrls(req, res){
 
     const newId = shortid();
     if(!URL) return res.status(400).json({err: "url not found"});
-    const record = await URLS.findOneAndUpdate({redirectUrl: URL},{$setOnInsert: {
+    const record = await URLS.create({
         shortId: newId,
         redirectUrl: URL,
         numberOfClicks:[],
         createdBy: req.user._id,
-    }},{upsert: true, returnOriginal: true});
+    });
     
     return res.render("home", {
         id: `http://localhost:${PORT}/url/${record ? record.shortId : newId}`,
